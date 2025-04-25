@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Màu nền -->
+    <solid android:color="@android:color/white" /> <!-- Hoặc bạn có thể sử dụng một gradient màu khác -->
+
+    <!-- Viền bo góc -->
+    <corners android:topRightRadius="30dp"
+        android:topLeftRadius="30dp"/> <!-- Thay đổi giá trị radius tùy ý -->
+</shape>

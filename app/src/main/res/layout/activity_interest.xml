@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn sở thích của bạn"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            />
+
+        <GridLayout
+            android:id="@+id/interestGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="4"
+            android:alignmentMode="alignMargins"
+            android:useDefaultMargins="true"
+            >
+
+            <!-- 12 ô sở thích -->
+            <ToggleButton
+                android:id="@+id/checkbox1"
+                android:textOff="Âm nhạc"
+                android:textOn="Âm nhạc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox2"
+                android:textOff="Thể thao"
+                android:textOn="Thể thao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox3"
+                android:textOff="Đọc sách"
+                android:textOn="Đọc sách"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox4"
+                android:textOff="Du lịch"
+                android:textOn="Du lịch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox5"
+                android:textOff="Chụp ảnh"
+                android:textOn="Chụp ảnh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox6"
+                android:textOff="Nấu ăn"
+                android:textOn="Nấu ăn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox7"
+                android:textOff="Game"
+                android:textOn="Game"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox8"
+                android:textOff="Công nghệ"
+                android:textOn="Công nghệ"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox9"
+                android:textOff="Vẽ"
+                android:textOn="Vẽ"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox10"
+                android:textOff="Thời trang"
+                android:textOn="Thời trang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox11"
+                android:textOff="Phim ảnh"
+                android:textOn="Phim ảnh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+            <ToggleButton
+                android:id="@+id/checkbox12"
+                android:textOff="Âm thanh"
+                android:textOn="Âm thanh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:background="@drawable/toggle_button_state"
+                android:textColor="@color/black" />
+
+        </GridLayout>
+        <Button
+            android:id="@+id/submitInterestButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Tiếp Tục"/>
+
+
+    </LinearLayout>
+</ScrollView>
