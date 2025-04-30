@@ -1,46 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/bg_gradient"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="30dp"
+        android:padding="20dp"
+        android:text="Hãy cho tôi biết chút về bạn nhé"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-65dp"
         android:gravity="center"
+        android:padding="17dp"
+        android:background="@drawable/rounded_background"
         android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hãy cho tôi biết chút về bạn nhé"
-            android:layout_gravity="center"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="30dp"/>
-        <!-- Họ tên -->
-        <EditText
-            android:id="@+id/editName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Họ tên"
-            android:padding="10dp"
             android:layout_marginBottom="16dp"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColorHint="@color/black"
+            android:hint="Họ tên">
 
-        <!-- Tuổi -->
-        <EditText
-            android:id="@+id/editAge"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_blue"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tuổi"
-            android:padding="10dp"
             android:layout_marginBottom="16dp"
-            android:textSize="20sp"
-            android:inputType="number"/>
+            android:textColorHint="@color/black"
+            android:hint="Tuổi">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_blue"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
         <!-- Giới tính -->
         <RadioGroup
@@ -55,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nam"
+                android:textColor="@color/black"
                 android:padding="10dp"/>
 
             <RadioButton
@@ -62,19 +86,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nữ"
+                android:textColor="@color/black"
                 android:padding="10dp"/>
         </RadioGroup>
 
-        <!-- Chiều cao -->
-        <EditText
-            android:id="@+id/editHeight"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Chiều cao (cm)"
-            android:padding="10dp"
             android:layout_marginBottom="16dp"
-            android:textSize="16sp"
-            android:inputType="number"/>
+            android:textColorHint="@color/black"
+            android:hint="Chiều cao (cm)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_blue"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <!-- Chọn hình ảnh -->
@@ -102,4 +133,4 @@
             android:text="Lưu thông tin"/>
 
     </LinearLayout>
-</ScrollView>
+</FrameLayout>

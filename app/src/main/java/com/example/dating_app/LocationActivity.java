@@ -1,6 +1,7 @@
 package com.example.dating_app;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class LocationActivity extends AppCompatActivity {
     private TextView txtLocation;
     private Button btnGetLocation;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +33,11 @@ public class LocationActivity extends AppCompatActivity {
         txtLocation = findViewById(R.id.txtLocation);
         btnGetLocation = findViewById(R.id.btnGetLocation);
 
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         btnGetLocation.setOnClickListener(v -> checkPermissionsAndGetLocation());
+
     }
 
     private void checkPermissionsAndGetLocation() {
@@ -85,6 +89,9 @@ public class LocationActivity extends AppCompatActivity {
                             // Hiển thị vị trí lên màn hình
                             String locationText = "Vị trí của bạn: " + "Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude();
                             txtLocation.setText(locationText);
+                            Intent intent = new Intent(LocationActivity.this, HomeActivity.class);
+                            startActivity(intent);
+
                         } else {
                             txtLocation.setText("Không thể lấy vị trí.");
                         }

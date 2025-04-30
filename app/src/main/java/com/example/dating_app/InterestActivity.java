@@ -3,9 +3,8 @@ package com.example.dating_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ToggleButton;
 import android.widget.Toast;
-
+import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -15,14 +14,15 @@ public class InterestActivity extends AppCompatActivity {
     private Button submitButton;
     private ArrayList<ToggleButton> toggleButtonList = new ArrayList<>();
 
+    private long userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
 
-        // Lấy thông tin người dùng từ RegisterActivity
-        String username = getIntent().getStringExtra("username");
-        String email = getIntent().getStringExtra("email");
+        // Lấy userId từ Intent
+        userId = getIntent().getLongExtra("userId", -1);
 
         // Khởi tạo ToggleButton
         for (int i = 1; i <= 12; i++) {
@@ -33,7 +33,6 @@ public class InterestActivity extends AppCompatActivity {
             }
         }
 
-        // Nút xác nhận
         submitButton = findViewById(R.id.submitInterestButton);
         submitButton.setOnClickListener(v -> {
             ArrayList<String> selectedInterests = new ArrayList<>();
@@ -46,11 +45,13 @@ public class InterestActivity extends AppCompatActivity {
             if (selectedInterests.isEmpty()) {
                 Toast.makeText(this, "Vui lòng chọn ít nhất một sở thích", Toast.LENGTH_SHORT).show();
             } else {
-                // Lưu vào database tại đây hoặc xử lý tiếp theo
-                Toast.makeText(this, "Sở thích đã lưu cho " + username, Toast.LENGTH_SHORT).show();
+                String interests = String.join(", ", selectedInterests);
+
                 Intent intent = new Intent(InterestActivity.this, ProfileActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
     }
 }
+

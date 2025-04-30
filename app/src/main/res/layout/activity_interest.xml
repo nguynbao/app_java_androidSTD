@@ -35,13 +35,13 @@
             <!-- 12 ô sở thích -->
             <ToggleButton
                 android:id="@+id/checkbox1"
-                android:textOff="Âm nhạc"
-                android:textOn="Âm nhạc"
-                android:layout_width="0dp"
+                android:layout_width="11dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:background="@drawable/toggle_button_state"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textOff="Âm nhạc"
+                android:textOn="Âm nhạc" />
 
             <ToggleButton
                 android:id="@+id/checkbox2"
