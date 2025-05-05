@@ -31,14 +31,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(UserViewHolder holder, int position) {
         User user = userList.get(position);
         holder.nameTextView.setText(user.getName());
-        holder.idTextView.setText(user.getId());
-        holder.emailTextView.setText(user.getEmail());
         holder.ageTextView.setText(String.valueOf(user.getAge()));
         holder.distanceTextView.setText(user.getDistance() + " km");
 
-        // Sử dụng Glide để tải và hiển thị ảnh từ URL
         Glide.with(holder.itemView.getContext())
-                .load(user.getImageUrl())  // URL của hình ảnh
+                .load(user.getImageUrl())
                 .into(holder.profileImageView);
     }
 
@@ -49,8 +46,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
-        TextView idTextView;
-        TextView emailTextView;
         TextView ageTextView;
         TextView distanceTextView;
         ImageView profileImageView;
@@ -58,8 +53,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         public UserViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.tvName);
-            idTextView = itemView.findViewById(R.id.tvId);
-            emailTextView = itemView.findViewById(R.id.tvEmail);
             ageTextView = itemView.findViewById(R.id.tvAge);
             distanceTextView = itemView.findViewById(R.id.tvDistance);
             profileImageView = itemView.findViewById(R.id.ivProfileImage);

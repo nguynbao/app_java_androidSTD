@@ -40,21 +40,8 @@
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
-            <!-- ID người dùng -->
-            <TextView
-                android:id="@+id/tvId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ID"
-                android:textSize="14sp"/>
 
-            <!-- Email người dùng -->
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="14sp"/>
+
 
             <!-- Tuổi người dùng -->
             <TextView
