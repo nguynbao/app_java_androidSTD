@@ -1,76 +1,65 @@
 package com.example.dating_app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.dating_app.adapter.UserAdapter;
 import com.example.dating_app.model.User;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private ViewPager2 viewPager;
 
-    private BottomNavigationView bottomNavigationView;
+    private RecyclerView recyclerView;
+    private UserAdapter userAdapter;
+    private List<User> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        viewPager = findViewById(R.id.viewPager);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        // Khởi tạo RecyclerView và danh sách người dùng
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        userList = new ArrayList<>();
 
-        List<User> users = new ArrayList<>();
+        // Kết nối Firebase Firestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference usersCollection = db.collection("users");
 
-        // Tạo user chỉ với ảnh, tên, vị trí
-        User user1 = new User();
-        user1.setName("Nguyễn Văn A");
-        user1.setLocation("Hà Nội");
-        user1.setImagePath("profile_image_1");
+        // Lấy dữ liệu từ Firestore
+        usersCollection.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String name = document.getString("name");
+                    String id = document.getString("id");
+                    String email = document.getString("email");
+                    int age = document.getLong("age").intValue();
+                    String imageUrl = document.getString("imageUrl");
+                    float distance = document.getDouble("distance").floatValue();
 
-        User user2 = new User();
-        user2.setName("Trần Thị B");
-        user2.setLocation("TP. Hồ Chí Minh");
-        user2.setImagePath("profile_image_2");
+                    // Thêm người dùng vào danh sách
+                    User user = new User(name, id, email, age, imageUrl, distance);
+                    userList.add(user);
+                }
 
-        User user3 = new User();
-        user3.setName("Lê Văn C");
-        user3.setLocation("Đà Nẵng");
-        user3.setImagePath("unknown_image");
-
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-
-        UserAdapter adapter = new UserAdapter(users);
-        viewPager.setAdapter(adapter);
-
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                Toast.makeText(this, "Trang chủ", Toast.LENGTH_SHORT).show();
-
-                return true;
-            } else if (id == R.id.nav_message) {
-                Toast.makeText(this, "Tin nhắn", Toast.LENGTH_SHORT).show();
-
-                return true;
-            }else if (id == R.id.nav_users) {
-                Toast.makeText(this, "Mọi người", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, UsersActivity.class);
-                startActivity(intent);
-                return true;
-            } else if (id == R.id.nav_profile) {
-                Toast.makeText(this, "Cá nhân", Toast.LENGTH_SHORT).show();
-                return true;
+                // Cập nhật RecyclerView với dữ liệu
+                userAdapter = new UserAdapter(userList);
+                recyclerView.setAdapter(userAdapter);
+            } else {
+                // Thông báo lỗi khi không lấy được dữ liệu
+                Toast.makeText(HomeActivity.this, "Error getting documents.", Toast.LENGTH_SHORT).show();
             }
-            return false;
         });
     }
 }

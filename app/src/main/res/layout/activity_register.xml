@@ -24,10 +24,6 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Logo -->
-        <!-- Căn giữa logo -->
-
-        <!-- Tiêu đề Đăng nhập -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,24 +34,7 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <!-- Nhập email -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:textColorHint="@color/black"
-            android:background="@drawable/border"
-            android:hint="Username">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/usernameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_blue"
-                android:inputType="text"
-                android:padding="12dp"
-                android:textColor="@color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
         <!-- Nhập email -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -74,7 +53,6 @@
                 android:padding="12dp"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
-
         <!-- Nhập mật khẩu -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

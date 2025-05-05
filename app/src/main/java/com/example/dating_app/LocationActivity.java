@@ -17,19 +17,28 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class LocationActivity extends AppCompatActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private FusedLocationProviderClient fusedLocationClient;
     private TextView txtLocation;
     private Button btnGetLocation;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         txtLocation = findViewById(R.id.txtLocation);
         btnGetLocation = findViewById(R.id.btnGetLocation);
 
@@ -71,13 +80,7 @@ public class LocationActivity extends AppCompatActivity {
 
     private void getLastLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         fusedLocationClient.getLastLocation()
@@ -86,15 +89,30 @@ public class LocationActivity extends AppCompatActivity {
                     public void onSuccess(Location location) {
                         // Kiểm tra nếu có vị trí
                         if (location != null) {
-                            // Hiển thị vị trí lên màn hình
-                            String locationText = "Vị trí của bạn: " + "Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude();
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+
+                            // Hiển thị vị trí
+                            String locationText = "Vị trí của bạn: Latitude: " + latitude + ", Longitude: " + longitude;
                             txtLocation.setText(locationText);
+
+                            // Lấy UID của user
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            if (currentUser != null) {
+                                String uid = currentUser.getUid();
+
+                                // Tạo một object location
+                                mDatabase.child("users").child(uid).child("location").setValue(latitude + "," + longitude);
+
+                            }
+
+                            Toast.makeText(LocationActivity.this, "Vị trí đã được cập nhật", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LocationActivity.this, HomeActivity.class);
                             startActivity(intent);
-
                         } else {
                             txtLocation.setText("Không thể lấy vị trí.");
                         }
+
                     }
                 });
     }
