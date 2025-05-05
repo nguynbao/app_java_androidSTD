@@ -1,4 +1,3 @@
-// (package declaration giữ nguyên)
 package com.example.dating_app;
 
 import android.app.AlertDialog;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import com.example.dating_app.ImgurUploader;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +28,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_GALLERY = 1;
@@ -170,24 +171,26 @@ public class ProfileActivity extends AppCompatActivity {
         progressDialog.show();
 
         if (selectedImageUri != null) {
-            StorageReference fileRef = storageRef.child(user.getUid() + ".jpg");
-            fileRef.putFile(selectedImageUri)
-                    .addOnSuccessListener(taskSnapshot ->
-                            fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                                String imageUrl = uri.toString();
-                                saveUserToDatabase(user.getUid(), name, age, height, gender, imageUrl);
-                                progressDialog.dismiss();
-                                goToLocationActivity();
-                            }))
-                    .addOnFailureListener(e -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(this, "Lỗi khi tải ảnh lên", Toast.LENGTH_SHORT).show();
-                    });
+            ImgurUploader.uploadImage(selectedImageUri, this, new ImgurUploader.OnUploadCompleteListener() {
+                @Override
+                public void onSuccess(String imageUrl) {
+                    saveUserToDatabase(user.getUid(), name, age, height, gender, imageUrl);
+                    progressDialog.dismiss();
+                    goToLocationActivity();
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    progressDialog.dismiss();
+                    Toast.makeText(ProfileActivity.this, "Lỗi khi tải ảnh lên Imgur: " + errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             saveUserToDatabase(user.getUid(), name, age, height, gender, "");
             progressDialog.dismiss();
             goToLocationActivity();
         }
+
     }
 
     private void saveUserToDatabase(String uid, String name, int age, int height, String gender, String imageUrl) {
@@ -204,7 +207,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void goToLocationActivity() {
-        startActivity(new Intent(this, LocationActivity.class));
-        finish();
+        startActivity(new Intent(ProfileActivity.this, LocationActivity.class));
     }
 }
